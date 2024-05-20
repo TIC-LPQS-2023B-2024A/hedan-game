@@ -1,11 +1,12 @@
-extends Node2D
+extends Node
 
+@export var questionnaire_scene: PackedScene
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if questionnaire_scene != null:
+		var questionnaire_scene_instance = questionnaire_scene.instantiate()
+		questionnaire_scene_instance.questions_answered.connect(_on_questionnaire_questions_answered)
+		add_child(questionnaire_scene_instance)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_questionnaire_questions_answered():
+	get_tree().quit()

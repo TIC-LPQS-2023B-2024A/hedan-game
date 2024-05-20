@@ -1,3 +1,8 @@
-[gd_scene format=3 uid="uid://cl1n3v1tx8the"]
+[gd_scene load_steps=3 format=3 uid="uid://cl1n3v1tx8the"]
 
-[node name="Game" type="Node2D"]
+[ext_resource type="Script" path="res://src/game.gd" id="1_nuib6"]
+[ext_resource type="PackedScene" uid="uid://cre4qj00j1y0e" path="res://src/questionnaire/questionnaire.tscn" id="2_lfswa"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_nuib6")
+questionnaire_scene = ExtResource("2_lfswa")
