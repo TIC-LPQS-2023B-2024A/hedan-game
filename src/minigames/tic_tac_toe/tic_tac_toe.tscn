@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://x1btjkpm5r4"]
+
+[node name="TicTacToe" type="Node2D"]
