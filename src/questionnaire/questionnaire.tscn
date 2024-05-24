@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cre4qj00j1y0e"]
+[gd_scene load_steps=6 format=3 uid="uid://cre4qj00j1y0e"]
 
 [ext_resource type="Script" path="res://src/questionnaire/questionnaire.gd" id="1_lyaks"]
-[ext_resource type="Texture2D" uid="uid://c7q84pacyc810" path="res://assets/questionnaire/sprites/happy.png" id="2_twjyo"]
-[ext_resource type="Texture2D" uid="uid://dsbjuqnd06no1" path="res://assets/questionnaire/sprites/sad.png" id="3_v21m8"]
+[ext_resource type="Texture2D" uid="uid://dutc1fqy82h1u" path="res://assets/backgrounds/game_bg.png" id="2_ls5j7"]
+[ext_resource type="Texture2D" uid="uid://bm4sb8hw03kwr" path="res://assets/gui/question.png" id="3_a747l"]
+[ext_resource type="Texture2D" uid="uid://oc03k0sefvvj" path="res://assets/sprites/happy.webp" id="4_b2e8s"]
+[ext_resource type="Texture2D" uid="uid://ct238vgve4uuq" path="res://assets/sprites/sad.webp" id="5_xk01d"]
 
 [node name="Questionnaire" type="Control"]
 layout_mode = 3
@@ -13,72 +15,86 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lyaks")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 2
-offset_left = -1.0
-offset_right = 1153.0
-offset_bottom = 648.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.529412, 0.807843, 0.921569, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_top = 60
-theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 60
+texture = ExtResource("2_ls5j7")
+expand_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 0
+[node name="QuestionContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 48
 
-[node name="QuestionContainer" type="PanelContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="ColorRect/MarginContainer/VBoxContainer/QuestionContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="QuestionContainer"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-color = Color(0.207843, 0.286275, 0.329412, 1)
+texture = ExtResource("3_a747l")
+patch_margin_left = 24
+patch_margin_top = 60
+patch_margin_right = 24
+patch_margin_bottom = 60
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/MarginContainer/VBoxContainer/QuestionContainer"]
+[node name="QuestionLabelContainer" type="MarginContainer" parent="QuestionContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 32
 
-[node name="QuestionLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/QuestionContainer/MarginContainer"]
-custom_minimum_size = Vector2(950, 0)
+[node name="QuestionLabel" type="Label" parent="QuestionContainer/QuestionLabelContainer"]
+custom_minimum_size = Vector2(1600, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 48
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.192157, 0.192157, 0.192157, 0.0941176)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 64
+text = "
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="AnswerOptions" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+[node name="AnswerOptions" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -528.0
+offset_top = -81.0
+offset_right = 528.0
+offset_bottom = 319.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 256
+
+[node name="YesOption" type="TextureButton" parent="AnswerOptions"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 100
+texture_normal = ExtResource("4_b2e8s")
 
-[node name="YesOption" type="TextureButton" parent="ColorRect/MarginContainer/VBoxContainer/AnswerOptions"]
+[node name="NoOption" type="TextureButton" parent="AnswerOptions"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("2_twjyo")
+texture_normal = ExtResource("5_xk01d")
 
-[node name="NoOption" type="TextureButton" parent="ColorRect/MarginContainer/VBoxContainer/AnswerOptions"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("3_v21m8")
-
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/AnswerOptions/YesOption" to="." method="_on_yes_option_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/AnswerOptions/NoOption" to="." method="_on_no_option_pressed"]
+[connection signal="pressed" from="AnswerOptions/YesOption" to="." method="_on_yes_option_pressed"]
+[connection signal="pressed" from="AnswerOptions/NoOption" to="." method="_on_no_option_pressed"]

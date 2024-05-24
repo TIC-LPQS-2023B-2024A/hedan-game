@@ -4,7 +4,7 @@ extends Node
 
 func _ready():
 	if questionnaire_scene != null:
-		var questionnaire_scene_instance = questionnaire_scene.instantiate()
+		var questionnaire_scene_instance = questionnaire_scene.instantiate() as Questionnaire
 		questionnaire_scene_instance.questions_answered.connect(_on_questionnaire_questions_answered)
 		add_child(questionnaire_scene_instance)
 
