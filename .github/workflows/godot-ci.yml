@@ -16,7 +16,20 @@ jobs:
       image: barichello/godot-ci:4.2.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Install envsubst
+        run: |
+          apt-get update
+          apt-get install -y gettext-base
+
+      - name: Set back end GAME_API_URL
+        uses: dominicwatson/github-action-envsubst@v1
+        with:
+          files: src/game.gd
+          patterns: $GAME_API_URL
+        env:
+          GAME_API_URL: ${{ vars.GAME_API_URL }}
 
       - name: Move export templates into position
         run: |

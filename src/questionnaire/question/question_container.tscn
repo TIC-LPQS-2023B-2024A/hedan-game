@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://c66enw53reggr"]
+
+[ext_resource type="Script" path="res://src/questionnaire/question/question_container.gd" id="1_55bai"]
+[ext_resource type="Texture2D" uid="uid://bm4sb8hw03kwr" path="res://assets/gui/question.png" id="1_di8ui"]
+[ext_resource type="Theme" uid="uid://dstxhsipc4oib" path="res://assets/themes/question_theme.tres" id="2_eg3jj"]
+
+[node name="QuestionContainer" type="MarginContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 241.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 96
+script = ExtResource("1_55bai")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_di8ui")
+patch_margin_left = 39
+patch_margin_top = 51
+patch_margin_right = 48
+patch_margin_bottom = 62
+
+[node name="QuestionLabelContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 247)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 32
+
+[node name="QuestionLabel" type="Label" parent="QuestionLabelContainer"]
+custom_minimum_size = Vector2(1600, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_eg3jj")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+language = "es_EC"

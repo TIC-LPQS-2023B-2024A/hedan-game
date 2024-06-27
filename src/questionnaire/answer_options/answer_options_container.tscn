@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://pme1hqw21lmb"]
+
+[ext_resource type="Script" path="res://src/questionnaire/answer_options/answer_options_container.gd" id="1_f20xx"]
+[ext_resource type="PackedScene" uid="uid://bap300n4c1k01" path="res://src/questionnaire/answer_options/answer_option.tscn" id="2_2k670"]
+[ext_resource type="Texture2D" uid="uid://dgdkfl3oixn60" path="res://assets/sprites/answer_options/sad.png" id="6_u4d6t"]
+
+[node name="AnswerOptionsContainer" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+offset_right = 1056.0
+offset_bottom = 400.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 256
+script = ExtResource("1_f20xx")
+
+[node name="YesOption" parent="." instance=ExtResource("2_2k670")]
+layout_mode = 2
+
+[node name="NoOption" parent="." instance=ExtResource("2_2k670")]
+layout_mode = 2
+texture_normal = ExtResource("6_u4d6t")
