@@ -33,3 +33,7 @@ mono_crash.*.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/godot,visualstudiocode
+
+# Exports from GODOT
+export/*
+!export/serve.py

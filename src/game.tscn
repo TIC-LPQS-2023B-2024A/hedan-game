@@ -6,3 +6,10 @@
 [node name="Game" type="Node"]
 script = ExtResource("1_nuib6")
 questionnaire_scene = ExtResource("2_lfswa")
+
+[node name="ValidateTokenRequest" type="HTTPRequest" parent="."]
+
+[node name="SendAnswersRequest" type="HTTPRequest" parent="."]
+
+[connection signal="request_completed" from="ValidateTokenRequest" to="." method="_on_validate_token_request_request_completed"]
+[connection signal="request_completed" from="SendAnswersRequest" to="." method="_on_send_answers_request_request_completed"]

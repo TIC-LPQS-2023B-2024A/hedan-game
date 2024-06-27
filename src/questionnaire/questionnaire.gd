@@ -7,11 +7,10 @@ class_name Questionnaire
 
 var _questions: Array[String] = []
 var _current_question = 0
-var _token = "dewddewdwedwdwde"
 var _answers: Array[Dictionary] = []
 var _start_time: int = 0
 
-signal questions_answered
+signal questions_answered(answers: Array[Dictionary])
 
 func _ready():
 	_questions = _parse_csv_to_questions("res://assets/resources/cmasr-2_preguntas.txt")
@@ -45,20 +44,13 @@ func _change_to_next_question(answer: bool):
 
 	_current_question += 1
 	if _current_question >= _questions.size():
-		questions_answered.emit()
+		questions_answered.emit(_answers)
 		return
 	_question_container.set_question(_questions[_current_question])
 
 func _on_option_pressed(answer: bool):
 	_change_to_next_question(answer)
 
-func save_answers_to_json():
-	var result = {
-		"token": _token,
-		"answers": _answers
-	}
-	var json_string = JSON.stringify(result)
-	print(json_string)
 
 func play_intro_tween():
 	_answer_options_container.modulate = Color(1, 1, 1, 0)
