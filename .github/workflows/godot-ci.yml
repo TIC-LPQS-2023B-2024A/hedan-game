@@ -18,6 +18,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - uses: actions/checkout@v4
+      - name: Set game API_URL
+        uses: dominicwatson/github-action-envsubst@v1
+        with:
+          files: src/game.gd
+          patterns: $GAME_API_URL
+        env:
+          BACKEND_WEB_APP_API: ${{ vars.GAME_API_URL }}
+
       - name: Move export templates into position
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates

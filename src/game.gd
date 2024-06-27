@@ -3,7 +3,7 @@ extends Node
 @export var questionnaire_scene: PackedScene
 var error_scene: PackedScene = preload ("res://src/errors/error_screen.tscn")
 var _token: String = ""
-const game_api_url: String = "http://127.0.0.1:8001"
+const game_api_url: String = "${GAME_API_URL}"
 
 @onready var _validate_token_request: HTTPRequest = $ValidateTokenRequest
 @onready var _send_answers_request: HTTPRequest = $SendAnswersRequest
