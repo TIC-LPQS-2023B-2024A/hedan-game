@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://bap300n4c1k01"]
+
+[ext_resource type="Texture2D" uid="uid://b4bhqb0jmqghf" path="res://assets/sprites/answer_options/happy.png" id="1_yti6h"]
+[ext_resource type="BitMap" uid="uid://bp0nswqohfwt2" path="res://assets/sprites/answer_options/button_mask.png" id="2_6olr5"]
+[ext_resource type="Script" path="res://src/questionnaire/answer_options/answer_option.gd" id="3_cbrdv"]
+[ext_resource type="Script" path="res://src/common/behaviours/cursor_changer.gd" id="4_b1sro"]
+[ext_resource type="Script" path="res://src/common/behaviours/tween_manager.gd" id="5_olpay"]
+[ext_resource type="Script" path="res://src/questionnaire/answer_options/answer_option_tween_animation_player.gd" id="6_oj2wv"]
+[ext_resource type="Texture2D" uid="uid://dec3fsu42guth" path="res://assets/sprites/answer_options/round-star-svgrepo-com.svg" id="7_8ibyd"]
+
+[sub_resource type="Curve" id="Curve_fljol"]
+max_value = 1.5
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.506696, 0.798113), 0.0, 0.0, 0, 0, Vector2(1, 1.04717), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_olpmh"]
+offsets = PackedFloat32Array(0.75122, 1)
+colors = PackedColorArray(0.912289, 0.912289, 0.912289, 1, 1, 1, 1, 0)
+
+[node name="AnswerOption" type="TextureButton"]
+anchors_preset = -1
+anchor_right = 0.208
+anchor_bottom = 0.37
+offset_right = 0.639984
+offset_bottom = 0.399994
+scale = Vector2(1.1, 1.1)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("1_yti6h")
+texture_click_mask = ExtResource("2_6olr5")
+script = ExtResource("3_cbrdv")
+
+[node name="TweenManager" type="Node" parent="." node_paths=PackedStringArray("tween_animation_player")]
+script = ExtResource("5_olpay")
+tween_animation_player = NodePath("../AnswerOptionTweenAnimationPlayer")
+
+[node name="CursorChanger" type="Node" parent="."]
+script = ExtResource("4_b1sro")
+
+[node name="AnswerOptionTweenAnimationPlayer" type="Node" parent="."]
+script = ExtResource("6_oj2wv")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(196.364, 185.455)
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.34
+fixed_fps = 30
+draw_order = 1
+texture = ExtResource("7_8ibyd")
+direction = Vector2(0, 0)
+spread = 23.65
+gravity = Vector2(0, 0)
+damping_min = 300.0
+damping_max = 300.0
+scale_amount_curve = SubResource("Curve_fljol")
+color = Color(1, 0.849054, 0.472665, 1)
+color_ramp = SubResource("Gradient_olpmh")
+hue_variation_min = -0.11
+hue_variation_max = 0.09

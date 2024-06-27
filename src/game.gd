@@ -1,11 +1,45 @@
-extends Node2D
+extends Node
 
+@export var questionnaire_scene: PackedScene
+var error_scene: PackedScene = preload ("res://src/errors/error_screen.tscn")
+var _token: String = ""
+const game_api_url: String = "http://127.0.0.1:8001"
 
-# Called when the node enters the scene tree for the first time.
+@onready var _validate_token_request: HTTPRequest = $ValidateTokenRequest
+@onready var _send_answers_request: HTTPRequest = $SendAnswersRequest
+
 func _ready():
-	pass # Replace with function body.
+	if OS.has_feature("web"):
+		_token = JavaScriptBridge.eval('''
+			let params = new URL(document.location).searchParams;
+			let token = params.get("token") ?? 'null';
+			token;
+		''')
+	if _token == 'null':
+		add_child(error_scene.instantiate())
+		return
+	
+	var token_json = JSON.stringify({"token": _token})
+	_validate_token_request.request("%s/questionnaires/validate-token" % [game_api_url], ["Content-Type: application/json"], HTTPClient.METHOD_POST, token_json)
 
+func _on_questionnaire_questions_answered(answers: Array[Dictionary]):
+	var result = {
+		"token": _token,
+		"answers": answers
+	}
+	var result_json = JSON.stringify(result)
+	_send_answers_request.request("%s/questionnaires/answers" % [game_api_url], ["Content-Type: application/json"], HTTPClient.METHOD_PATCH, result_json)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_validate_token_request_request_completed(_result: int, response_code: int, _headers: PackedStringArray, _body: PackedByteArray):
+	if response_code != 200:
+		add_child(error_scene.instantiate())
+		return
+	
+	if questionnaire_scene != null:
+		var questionnaire_scene_instance = questionnaire_scene.instantiate() as Questionnaire
+		questionnaire_scene_instance.questions_answered.connect(_on_questionnaire_questions_answered)
+		add_child(questionnaire_scene_instance)
+
+func _on_send_answers_request_request_completed(_result: int, _response_code: int, _headers: PackedStringArray, _body: PackedByteArray):
+	#TODO: Mostrar pantalla final
+	get_tree().quit()
