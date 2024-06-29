@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="HEDAN | Juego"
-run/main_scene="res://src/game.tscn"
+run/main_scene="res://src/questionnaire/questionnaire.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://src/common/behaviours/global.gd"
 
 [display]
 
