@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://bova5one0tgvu"]
+
+[ext_resource type="Script" path="res://src/minigames/tic_tac_toe/cell.gd" id="1_jfgeh"]
+[ext_resource type="Script" path="res://src/common/behaviours/cursor_changer.gd" id="2_ryfnl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6hhi4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dnjy"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmjv6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[node name="Cell" type="Button"]
+custom_minimum_size = Vector2(300, 300)
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 200
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6hhi4")
+flat = true
+script = ExtResource("1_jfgeh")
+
+[node name="Background" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_8dnjy")
+
+[node name="Border" type="Panel" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_tmjv6")
+
+[node name="CursorChanger" type="Node" parent="."]
+script = ExtResource("2_ryfnl")
+
+[connection signal="pressed" from="." to="." method="draw_cell"]
