@@ -86,16 +86,16 @@ func start_minigame():
 	var minigame_start_message = _minigame_start_message_container_scene.instantiate()
 	minigame_start_message.position = Vector2(0, 0)
 	add_child(minigame_start_message)
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(4).timeout
 
 	var tween = create_tween().set_parallel(true)
-	tween.tween_property(self, "position:y", -get_viewport().size.y - 500, 1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "position:y", -get_viewport_rect().size.y - 50, 1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
 	await tween.finished
 	minigame_start_message.queue_free()
 
 	_current_breakpoint += 1
 	_current_minigame = minigames[_current_breakpoint - 1].instantiate()
-	_current_minigame.position.y = get_viewport().size.y + 500
+	_current_minigame.position.y = get_viewport_rect().size.y + 50
 	_current_minigame.minigame_ended.connect(_on_minigame_ended)
 	_current_minigame.modulate = Color(1, 1, 1, 0)
 	add_child(_current_minigame)
