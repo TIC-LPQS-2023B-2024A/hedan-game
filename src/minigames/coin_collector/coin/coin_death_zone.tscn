@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0hc25unlr6j4"]
+
+[ext_resource type="Script" path="res://src/minigames/coin_collector/coin/coin_death_zone.gd" id="1_74a80"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mnlh1"]
+a = Vector2(-1500, 0)
+b = Vector2(1500, 0)
+
+[node name="CoinDeathZone" type="Area2D"]
+script = ExtResource("1_74a80")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_mnlh1")
+debug_color = Color(0.999138, 0.0238237, 3.85046e-07, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
