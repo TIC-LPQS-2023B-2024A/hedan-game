@@ -1,0 +1,91 @@
+[gd_scene load_steps=20 format=3 uid="uid://c4eyfyos227l2"]
+
+[ext_resource type="Script" path="res://src/minigames/coin_collector/coin/coin.gd" id="1_adsnf"]
+[ext_resource type="Texture2D" uid="uid://b5cs5uyxq3b17" path="res://assets/sprites/minigames/coin_collector/coin/image 1.png" id="1_w2wyk"]
+[ext_resource type="Texture2D" uid="uid://djpdx23hmqj45" path="res://assets/sprites/minigames/coin_collector/coin/image 2.png" id="2_aqj28"]
+[ext_resource type="Texture2D" uid="uid://t0n43cmm1op7" path="res://assets/sprites/minigames/coin_collector/coin/image 3.png" id="3_sd34r"]
+[ext_resource type="Texture2D" uid="uid://c4enc2s2el5se" path="res://assets/sprites/minigames/coin_collector/coin/image 4.png" id="4_lyphm"]
+[ext_resource type="Texture2D" uid="uid://iaoov11qxxxm" path="res://assets/sprites/minigames/coin_collector/coin/image 5.png" id="5_sjtoh"]
+[ext_resource type="Texture2D" uid="uid://d2cc6euiaa2ct" path="res://assets/sprites/minigames/coin_collector/coin/image 6.png" id="6_2vek4"]
+[ext_resource type="Texture2D" uid="uid://cb7dhkjhpt64i" path="res://assets/sprites/minigames/coin_collector/coin/image 7.png" id="7_x0620"]
+[ext_resource type="Texture2D" uid="uid://cr4dfqcolv8hx" path="res://assets/sprites/minigames/coin_collector/coin/image 8.png" id="8_0rv3l"]
+[ext_resource type="Texture2D" uid="uid://b33sl8wsl1jpi" path="res://assets/sprites/minigames/coin_collector/coin/image 9.png" id="9_kmord"]
+[ext_resource type="Texture2D" uid="uid://c6dl47b00ci7u" path="res://assets/sprites/minigames/coin_collector/coin/image 10.png" id="10_54lvn"]
+[ext_resource type="Texture2D" uid="uid://bxomoepi0j346" path="res://assets/sprites/minigames/coin_collector/coin/image 11.png" id="11_emjj5"]
+[ext_resource type="Texture2D" uid="uid://7cj0yjmm315j" path="res://assets/sprites/minigames/coin_collector/coin/image 12.png" id="12_ljcgj"]
+[ext_resource type="Texture2D" uid="uid://5pa3i6kv5j34" path="res://assets/sprites/minigames/coin_collector/coin/image 13.png" id="13_0cy5t"]
+[ext_resource type="Texture2D" uid="uid://7uo21t3085o0" path="res://assets/sprites/minigames/coin_collector/coin/image 14.png" id="14_6ny2v"]
+[ext_resource type="Texture2D" uid="uid://chldae7fxx7t" path="res://assets/sprites/minigames/coin_collector/coin/image 15.png" id="15_ofqi6"]
+[ext_resource type="Texture2D" uid="uid://cqacb63o0rd0l" path="res://assets/sprites/minigames/coin_collector/coin/image 16.png" id="16_83xjb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vttj0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w2wyk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_aqj28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sd34r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lyphm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sjtoh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2vek4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_x0620")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0rv3l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_kmord")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_54lvn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_emjj5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ljcgj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_0cy5t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_6ny2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ofqi6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_83xjb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 30.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3sjrg"]
+size = Vector2(96, 34)
+
+[node name="Coin" type="AnimatableBody2D"]
+sync_to_physics = false
+script = ExtResource("1_adsnf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vttj0")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 48)
+shape = SubResource("RectangleShape2D_3sjrg")

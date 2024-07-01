@@ -14,8 +14,10 @@ theme_override_constants/separation = 256
 script = ExtResource("1_f20xx")
 
 [node name="YesOption" parent="." instance=ExtResource("2_2k670")]
+z_index = 1
 layout_mode = 2
 
 [node name="NoOption" parent="." instance=ExtResource("2_2k670")]
+z_index = 1
 layout_mode = 2
 texture_normal = ExtResource("6_u4d6t")
