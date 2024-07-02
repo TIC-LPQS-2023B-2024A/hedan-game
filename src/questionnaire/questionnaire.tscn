@@ -29,6 +29,7 @@ anchor_right = 1.0
 anchor_bottom = 2.22222
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_p1nne")
 metadata/_edit_use_anchors_ = true
 
