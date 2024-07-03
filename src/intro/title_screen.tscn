@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://cplmti06na20m"]
+
+[ext_resource type="Shader" path="res://src/intro/intro.gdshader" id="1_gi4o6"]
+[ext_resource type="Texture2D" uid="uid://crpiweohycjhl" path="res://assets/backgrounds/bg.png" id="2_vk1ua"]
+[ext_resource type="FontFile" uid="uid://4y22whsnw4fa" path="res://assets/fonts/TitanOne-Regular.ttf" id="3_mqfc8"]
+[ext_resource type="Texture2D" uid="uid://blg3cg1naay1o" path="res://assets/intro/buttom_play.png" id="4_7iqf7"]
+[ext_resource type="Script" path="res://src/intro/intro.gd" id="5_2wvtc"]
+[ext_resource type="FontFile" uid="uid://bxd7cgpuhmv3g" path="res://assets/fonts/Poppins-Medium.ttf" id="6_egnnf"]
+[ext_resource type="Script" path="res://src/common/behaviours/cursor_changer.gd" id="7_qqot3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18dlg"]
+shader = ExtResource("1_gi4o6")
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_18dlg")
+layout_mode = 0
+offset_top = -719.0
+offset_right = 1920.0
+offset_bottom = 1681.0
+texture = ExtResource("2_vk1ua")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -619.5
+offset_top = 149.0
+offset_right = 619.5
+offset_bottom = 551.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.376471)
+theme_override_constants/shadow_offset_x = 13
+theme_override_constants/shadow_offset_y = 9
+theme_override_fonts/font = ExtResource("3_mqfc8")
+theme_override_font_sizes/font_size = 350
+text = "HEDAN"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -251.5
+offset_top = -370.0
+offset_right = 251.5
+offset_bottom = -197.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("4_7iqf7")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("5_2wvtc")
+
+[node name="Play" type="Label" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = -60.0
+offset_right = 126.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_egnnf")
+theme_override_font_sizes/font_size = 85
+text = "Jugar"
+
+[node name="CursorChanger" type="Node" parent="TextureButton"]
+script = ExtResource("7_qqot3")
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]

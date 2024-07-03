@@ -1,7 +1,8 @@
 extends Node
 
-@export var questionnaire_scene: PackedScene
-var error_scene: PackedScene = preload ("res://src/errors/error_screen.tscn")
+@onready var error_scene: PackedScene = preload ("res://src/errors/error_screen.tscn")
+@onready var title_screen: PackedScene = preload ("res://src/intro/title_screen.tscn")
+
 var _token: String = ""
 const game_api_url: String = "${GAME_API_URL}"
 
@@ -35,10 +36,7 @@ func _on_validate_token_request_request_completed(_result: int, response_code: i
 		add_child(error_scene.instantiate())
 		return
 	
-	if questionnaire_scene != null:
-		var questionnaire_scene_instance = questionnaire_scene.instantiate() as Questionnaire
-		questionnaire_scene_instance.questions_answered.connect(_on_questionnaire_questions_answered)
-		add_child(questionnaire_scene_instance)
+	add_child(title_screen.instantiate())
 
 func _on_send_answers_request_request_completed(_result: int, _response_code: int, _headers: PackedStringArray, _body: PackedByteArray):
 	#TODO: Mostrar pantalla final
