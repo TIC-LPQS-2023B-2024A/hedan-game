@@ -26,9 +26,20 @@ var _current_minigame: Minigame = null
 signal questions_answered(answers: Array[Dictionary])
 
 func _ready():
+	modulate = Color(0, 0, 0, 1)
+	_answer_options_container.modulate = Color(1, 1, 1, 0)
+	_question_container.modulate = Color(1, 1, 1, 0)
+
+	_answer_options_container.disable_options()
+	
 	_questions = _parse_csv_to_questions("res://assets/resources/cmasr-2_preguntas.txt")
 	_question_container.set_initial_question(_questions[0])
 	_answer_options_container.answer_selected.connect(_on_option_pressed)
+
+	var intro_tween = create_tween().set_parallel(false)
+	intro_tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE)
+	await intro_tween.finished
+
 	await play_intro_tween()
 	_start_time = Time.get_ticks_msec()
 	_question_container.question_changed.connect(_on_question_changed)
@@ -69,11 +80,6 @@ func _on_option_pressed(answer: bool):
 	_change_to_next_question(answer)
 
 func play_intro_tween():
-	_answer_options_container.modulate = Color(1, 1, 1, 0)
-	_question_container.modulate = Color(1, 1, 1, 0)
-
-	_answer_options_container.disable_options()
-
 	var intro_tween = create_tween().set_parallel(true)
 	intro_tween.tween_property(_answer_options_container, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE)
 	intro_tween.tween_property(_question_container, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE).set_delay(0.5)

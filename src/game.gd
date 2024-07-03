@@ -1,5 +1,6 @@
 extends Node
 
+@export var questionnaire_scene: PackedScene
 @onready var error_scene: PackedScene = preload ("res://src/errors/error_screen.tscn")
 @onready var title_screen: PackedScene = preload ("res://src/intro/title_screen.tscn")
 
@@ -36,8 +37,16 @@ func _on_validate_token_request_request_completed(_result: int, response_code: i
 		add_child(error_scene.instantiate())
 		return
 	
-	add_child(title_screen.instantiate())
+	var title_screen_instance = title_screen.instantiate() as TitleScreen
+	title_screen_instance.start_game_requested.connect(_on_start_game_requested)
+	add_child(title_screen_instance)
 
 func _on_send_answers_request_request_completed(_result: int, _response_code: int, _headers: PackedStringArray, _body: PackedByteArray):
 	#TODO: Mostrar pantalla final
 	get_tree().quit()
+
+func _on_start_game_requested():
+	var questionnaire_scene_instance = questionnaire_scene.instantiate() as Questionnaire
+	questionnaire_scene_instance.questions_answered.connect(_on_questionnaire_questions_answered)
+	add_child(questionnaire_scene_instance)
+	$TitleScreen.queue_free()
