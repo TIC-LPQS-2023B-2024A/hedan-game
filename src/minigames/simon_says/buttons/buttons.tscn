@@ -1,0 +1,69 @@
+[gd_scene load_steps=14 format=3 uid="uid://cyniy16e83ywt"]
+
+[ext_resource type="Script" path="res://src/minigames/simon_says/buttons/buttons.gd" id="1_crgxn"]
+[ext_resource type="PackedScene" uid="uid://b0a8n6sml7mdg" path="res://src/minigames/simon_says/buttons/sequence_button.tscn" id="1_odhkt"]
+[ext_resource type="Texture2D" uid="uid://ck3qx4bwv52o1" path="res://assets/sprites/minigames/simon_says/characters/blue-idle.png" id="2_r18n3"]
+[ext_resource type="Texture2D" uid="uid://c0ogfvo1lymmi" path="res://assets/sprites/minigames/simon_says/characters/yellow-idle.png" id="2_tgsag"]
+[ext_resource type="Texture2D" uid="uid://d3cvj17l4b6l6" path="res://assets/sprites/minigames/simon_says/characters/yellow-active.png" id="3_shidp"]
+[ext_resource type="BitMap" uid="uid://bvr3463pdmotc" path="res://assets/sprites/minigames/simon_says/characters/yellow-bitmap.jpg" id="3_ux3yu"]
+[ext_resource type="BitMap" uid="uid://uf7ytwtl0ubv" path="res://assets/sprites/minigames/simon_says/characters/blue-bitmap.png" id="3_vnshl"]
+[ext_resource type="Texture2D" uid="uid://dx62yah8fqnw7" path="res://assets/sprites/minigames/simon_says/characters/green-active.png" id="4_iyfg1"]
+[ext_resource type="Texture2D" uid="uid://t1r364gcp3da" path="res://assets/sprites/minigames/simon_says/characters/green-idle.png" id="4_w0jqo"]
+[ext_resource type="BitMap" uid="uid://c01pywqpppoa5" path="res://assets/sprites/minigames/simon_says/characters/green-bitmap.png" id="5_705ib"]
+[ext_resource type="Texture2D" uid="uid://b7n1q30mc0qkc" path="res://assets/sprites/minigames/simon_says/characters/red-idle.png" id="6_o6ko4"]
+[ext_resource type="Texture2D" uid="uid://c3hobx2v8sy4" path="res://assets/sprites/minigames/simon_says/characters/red-active.png" id="9_6swfh"]
+[ext_resource type="Texture2D" uid="uid://baawd4jxv6cyg" path="res://assets/sprites/minigames/simon_says/characters/blue-active.png" id="12_jw35a"]
+
+[node name="Buttons" type="GridContainer"]
+theme_override_constants/h_separation = 48
+theme_override_constants/v_separation = 48
+columns = 3
+script = ExtResource("1_crgxn")
+
+[node name="EmptyPlaceholder" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="GreenSequenceButton" parent="." instance=ExtResource("1_odhkt")]
+layout_mode = 2
+texture_normal = ExtResource("4_w0jqo")
+texture_click_mask = ExtResource("5_705ib")
+active_texture = ExtResource("4_iyfg1")
+
+[node name="EmptyPlaceholder2" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="YellowSequenceButton" parent="." instance=ExtResource("1_odhkt")]
+layout_mode = 2
+texture_normal = ExtResource("2_tgsag")
+texture_click_mask = ExtResource("3_ux3yu")
+active_texture = ExtResource("3_shidp")
+
+[node name="EmptyPlaceholder3" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="RedSequenceButton" parent="." instance=ExtResource("1_odhkt")]
+layout_mode = 2
+texture_normal = ExtResource("6_o6ko4")
+active_texture = ExtResource("9_6swfh")
+
+[node name="EmptyPlaceholder4" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BlueSequenceButton" parent="." instance=ExtResource("1_odhkt")]
+layout_mode = 2
+texture_normal = ExtResource("2_r18n3")
+texture_click_mask = ExtResource("3_vnshl")
+active_texture = ExtResource("12_jw35a")
+
+[connection signal="pressed" from="GreenSequenceButton" to="." method="_on_green_sequence_button_pressed"]
+[connection signal="pressed" from="YellowSequenceButton" to="." method="_on_yellow_sequence_button_pressed"]
+[connection signal="pressed" from="RedSequenceButton" to="." method="_on_red_sequence_button_pressed"]
+[connection signal="pressed" from="BlueSequenceButton" to="." method="_on_blue_sequence_button_pressed"]
