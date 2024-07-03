@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq2qq4s7gmj6j"]
+
+[ext_resource type="Texture2D" uid="uid://ca1wksd6cajxs" path="res://assets/gui/Panel.png" id="1_ikq2n"]
+
+[node name="GuiPanel" type="NinePatchRect"]
+offset_right = 82.0
+offset_bottom = 116.0
+texture = ExtResource("1_ikq2n")
+patch_margin_left = 75
+patch_margin_top = 85
+patch_margin_right = 78
+patch_margin_bottom = 95

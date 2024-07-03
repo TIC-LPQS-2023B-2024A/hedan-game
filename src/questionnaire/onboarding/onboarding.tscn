@@ -1,0 +1,208 @@
+[gd_scene load_steps=10 format=3 uid="uid://mv7p5osa8oig"]
+
+[ext_resource type="Script" path="res://src/questionnaire/onboarding/onboarding.gd" id="1_ju6de"]
+[ext_resource type="PackedScene" uid="uid://cq2qq4s7gmj6j" path="res://src/common/gui/gui_panel.tscn" id="1_w3pb2"]
+[ext_resource type="Theme" uid="uid://dstxhsipc4oib" path="res://assets/themes/question_theme.tres" id="2_do1gh"]
+[ext_resource type="Texture2D" uid="uid://b4bhqb0jmqghf" path="res://assets/sprites/answer_options/happy.png" id="3_1uu0g"]
+[ext_resource type="PackedScene" uid="uid://dvuoem26hoq32" path="res://src/common/gui/ribbon.tscn" id="3_nqkem"]
+[ext_resource type="Texture2D" uid="uid://dgdkfl3oixn60" path="res://assets/sprites/answer_options/sad.png" id="4_71npd"]
+[ext_resource type="FontFile" uid="uid://4y22whsnw4fa" path="res://assets/fonts/TitanOne-Regular.ttf" id="4_rhpcd"]
+[ext_resource type="PackedScene" uid="uid://bms252q7tfcmg" path="res://src/common/gui/button.tscn" id="6_mwsb0"]
+[ext_resource type="Script" path="res://src/common/behaviours/cursor_changer.gd" id="8_4hvit"]
+
+[node name="Onboarding" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ju6de")
+
+[node name="GuiPanel" parent="." instance=ExtResource("1_w3pb2")]
+layout_mode = 1
+offset_left = 125.0
+offset_top = 150.0
+offset_right = 1799.0
+offset_bottom = 1044.0
+
+[node name="FirstInstruction" type="Label" parent="GuiPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -729.5
+offset_top = -237.5
+offset_right = 729.5
+offset_bottom = 349.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_do1gh")
+theme_override_font_sizes/font_size = 56
+text = "Las oraciones que aparecen en este formulario dicen como piensan y sienten algunas personas acerca de ellas mismas. Lee con cuidado cada oración y luego selecciona la opción que corresponda a tu respuesta."
+autowrap_mode = 2
+clip_text = true
+
+[node name="SecondInstruction" type="Label" parent="GuiPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -729.5
+offset_top = -237.5
+offset_right = 729.5
+offset_bottom = 349.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_do1gh")
+theme_override_font_sizes/font_size = 56
+text = "Cuando respondas las preguntas escoje la carita feliz      , si piensas que así eres. Escoje la carita triste      , si crees que no eres así."
+autowrap_mode = 2
+clip_text = true
+
+[node name="HappyFaceMini" type="TextureRect" parent="GuiPanel/SecondInstruction"]
+layout_mode = 0
+offset_left = 123.5
+offset_top = 77.5
+offset_right = 523.5
+offset_bottom = 477.5
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_1uu0g")
+
+[node name="SadFaceMini" type="TextureRect" parent="GuiPanel/SecondInstruction"]
+layout_mode = 0
+offset_left = 154.5
+offset_top = 161.5
+offset_right = 554.5
+offset_bottom = 561.5
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_71npd")
+
+[node name="HappyFace" type="TextureRect" parent="GuiPanel/SecondInstruction"]
+layout_mode = 0
+offset_left = -7.5
+offset_top = 278.5
+offset_right = 392.5
+offset_bottom = 678.5
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_1uu0g")
+
+[node name="SadFace" type="TextureRect" parent="GuiPanel/SecondInstruction"]
+layout_mode = 0
+offset_left = 585.5
+offset_top = 284.5
+offset_right = 985.5
+offset_bottom = 684.5
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_71npd")
+
+[node name="IAm" type="Label" parent="GuiPanel/SecondInstruction"]
+layout_mode = 0
+offset_left = 238.5
+offset_top = 317.5
+offset_right = 466.5
+offset_bottom = 408.5
+theme = ExtResource("2_do1gh")
+text = "Soy así"
+
+[node name="IAmNot" type="Label" parent="GuiPanel/SecondInstruction"]
+layout_mode = 0
+offset_left = 831.5
+offset_top = 320.5
+offset_right = 1158.5
+offset_bottom = 411.5
+theme = ExtResource("2_do1gh")
+text = "No soy así"
+
+[node name="ThirdInstruction" type="Label" parent="GuiPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -729.5
+offset_top = -237.5
+offset_right = 729.5
+offset_bottom = 349.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_do1gh")
+theme_override_font_sizes/font_size = 56
+text = "Responde a cada oración, incluso si te resulta difícil elegir una respuesta que se aplique a ti. No hay respuestas correctas ni incorrectas, solo tú puedes decirnos como piensas y sientes con respecto a ti mismo."
+autowrap_mode = 2
+clip_text = true
+
+[node name="NextButton" parent="GuiPanel" instance=ExtResource("6_mwsb0")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -522.0
+offset_top = -244.0
+offset_right = 114.0
+offset_bottom = -25.9996
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.7, 0.7)
+
+[node name="Label" type="Label" parent="GuiPanel/NextButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.5
+offset_top = -57.5
+offset_right = 163.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_rhpcd")
+theme_override_font_sizes/font_size = 80
+text = "Siguiente"
+
+[node name="CursorChanger" type="Node" parent="GuiPanel/NextButton"]
+script = ExtResource("8_4hvit")
+
+[node name="Ribbon" parent="." instance=ExtResource("3_nqkem")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 31.0
+offset_right = 1903.0
+offset_bottom = 365.0
+
+[node name="Title" type="Label" parent="Ribbon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -97.0
+offset_right = 178.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_rhpcd")
+theme_override_font_sizes/font_size = 120
+text = "Instrucciones"
+
+[node name="BlockControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="GuiPanel/NextButton" to="." method="_on_next_button_pressed"]

@@ -5,6 +5,7 @@ class_name Questionnaire
 @onready var _answer_options_container: AnswerOptionsContainer = $AnswerOptionsContainer
 @onready var _question_container: QuestionContainer = $QuestionContainer
 @onready var _minigame_start_message_container_scene = preload ("res://src/questionnaire/minigame_start_message_container/minigame_start_message_container.tscn")
+@onready var _onboarding_scene = preload ("res://src/questionnaire/onboarding/onboarding.tscn")
 @onready var _block_control: Control = $BlockControl
 
 var _questions: Array[String] = []
@@ -40,10 +41,8 @@ func _ready():
 	intro_tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE)
 	await intro_tween.finished
 
-	await play_intro_tween()
-	_start_time = Time.get_ticks_msec()
-	_question_container.question_changed.connect(_on_question_changed)
-	_block_control.visible = false
+	add_child(_onboarding_scene.instantiate())
+	($Onboarding as Onboarding).onboarding_ended.connect(_on_onboarding_ended)
 
 func _parse_csv_to_questions(file_path: String) -> Array[String]:
 	var file = FileAccess.open(file_path, FileAccess.READ)
@@ -55,6 +54,17 @@ func _parse_csv_to_questions(file_path: String) -> Array[String]:
 	
 	file.close()
 	return questions_array
+
+func _on_onboarding_ended():
+	var onboarding_ended_tween = create_tween().set_parallel(false)
+	onboarding_ended_tween.tween_property($Onboarding, "modulate:a", 0, 0.5).set_trans(Tween.TRANS_SINE)
+	await onboarding_ended_tween.finished
+	$Onboarding.queue_free()
+
+	await play_intro_tween()
+	_start_time = Time.get_ticks_msec()
+	_question_container.question_changed.connect(_on_question_changed)
+	_block_control.visible = false
 
 func _change_to_next_question(answer: bool):
 	var end_time = Time.get_ticks_msec()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://pme1hqw21lmb"]
+[gd_scene load_steps=5 format=3 uid="uid://pme1hqw21lmb"]
 
 [ext_resource type="Script" path="res://src/questionnaire/answer_options/answer_options_container.gd" id="1_f20xx"]
 [ext_resource type="PackedScene" uid="uid://bap300n4c1k01" path="res://src/questionnaire/answer_options/answer_option.tscn" id="2_2k670"]
+[ext_resource type="Theme" uid="uid://dstxhsipc4oib" path="res://assets/themes/question_theme.tres" id="3_a3jyl"]
 [ext_resource type="Texture2D" uid="uid://dgdkfl3oixn60" path="res://assets/sprites/answer_options/sad.png" id="6_u4d6t"]
 
 [node name="AnswerOptionsContainer" type="HBoxContainer"]
@@ -17,7 +18,39 @@ script = ExtResource("1_f20xx")
 z_index = 1
 layout_mode = 2
 
+[node name="Label" type="Label" parent="YesOption"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -118.0
+offset_top = -11.0
+offset_right = 110.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_a3jyl")
+text = "Soy así"
+
 [node name="NoOption" parent="." instance=ExtResource("2_2k670")]
 z_index = 1
 layout_mode = 2
 texture_normal = ExtResource("6_u4d6t")
+
+[node name="Label2" type="Label" parent="NoOption"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -3.0
+offset_right = 114.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_a3jyl")
+text = "No soy así"
