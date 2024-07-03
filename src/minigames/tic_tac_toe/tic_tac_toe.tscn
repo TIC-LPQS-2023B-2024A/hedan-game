@@ -1,3 +1,89 @@
-[gd_scene format=3 uid="uid://x1btjkpm5r4"]
+[gd_scene load_steps=5 format=3 uid="uid://x1btjkpm5r4"]
 
-[node name="TicTacToe" type="Node2D"]
+[ext_resource type="Script" path="res://src/minigames/tic_tac_toe/tic_tac_toe.gd" id="1_bqh2c"]
+
+[sub_resource type="Animation" id="Animation_4xp0d"]
+resource_name = "new_game_init"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1148)]
+}
+
+[sub_resource type="Animation" id="Animation_wlyu5"]
+resource_name = "slide_transition"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1148), Vector2(-1920, 1148)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1u0b0"]
+_data = {
+"new_game_init": SubResource("Animation_4xp0d"),
+"slide_transition": SubResource("Animation_wlyu5")
+}
+
+[node name="TicTacToe" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1148.0
+offset_bottom = 1148.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+script = ExtResource("1_bqh2c")
+play_with = "AI"
+
+[node name="TransitionPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1u0b0")
+}
+
+[node name="Cells" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+
+[connection signal="animation_finished" from="TransitionPlayer" to="." method="_on_animation_player_animation_finished"]

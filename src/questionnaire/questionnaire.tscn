@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cre4qj00j1y0e"]
 
 [ext_resource type="Script" path="res://src/questionnaire/questionnaire.gd" id="1_lyaks"]
-[ext_resource type="Texture2D" uid="uid://ddob45mu1rkis" path="res://assets/backgrounds/bg.png" id="2_p1nne"]
+[ext_resource type="Texture2D" uid="uid://crpiweohycjhl" path="res://assets/backgrounds/bg.png" id="2_p1nne"]
 [ext_resource type="Shader" path="res://src/questionnaire/clouds.gdshader" id="3_wh1li"]
 [ext_resource type="Texture2D" uid="uid://dqq025dqhmh3i" path="res://assets/backgrounds/clouds.png" id="4_diebv"]
 [ext_resource type="PackedScene" uid="uid://c66enw53reggr" path="res://src/questionnaire/question/question_container.tscn" id="5_3id7h"]
@@ -23,13 +23,13 @@ grow_vertical = 2
 script = ExtResource("1_lyaks")
 
 [node name="Background" type="TextureRect" parent="."]
-z_index = -1
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 2.22222
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_p1nne")
 metadata/_edit_use_anchors_ = true
 

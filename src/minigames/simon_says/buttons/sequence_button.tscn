@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0a8n6sml7mdg"]
+
+[ext_resource type="Script" path="res://src/minigames/simon_says/buttons/sequence_button.gd" id="1_d38ss"]
+[ext_resource type="Script" path="res://src/common/behaviours/cursor_changer.gd" id="1_vhoem"]
+
+[node name="SequenceButton" type="TextureButton"]
+script = ExtResource("1_d38ss")
+
+[node name="CursorChanger" type="Node" parent="."]
+script = ExtResource("1_vhoem")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
