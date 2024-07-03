@@ -19,7 +19,7 @@ script = ExtResource("1_kiyuw")
 
 [node name="CoinCollectorMain2D" type="Node2D" parent="."]
 script = ExtResource("2_cbthj")
-coins_to_collect = 200
+coins_to_collect = 100
 
 [node name="Chest" parent="CoinCollectorMain2D" instance=ExtResource("3_ricw4")]
 position = Vector2(920, 752)

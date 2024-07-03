@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://bvr3463pdmotc"
+path="res://.godot/imported/yellow-bitmap.jpg-b12238d54270d4a919662246876633ca.res"
+
+[deps]
+
+source_file="res://assets/sprites/minigames/simon_says/characters/yellow-bitmap.jpg"
+dest_files=["res://.godot/imported/yellow-bitmap.jpg-b12238d54270d4a919662246876633ca.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

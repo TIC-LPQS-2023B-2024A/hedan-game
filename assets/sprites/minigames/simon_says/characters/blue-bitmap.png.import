@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://uf7ytwtl0ubv"
+path="res://.godot/imported/blue-bitmap.png-819030d2697c1e7c98881ea6503ec494.res"
+
+[deps]
+
+source_file="res://assets/sprites/minigames/simon_says/characters/blue-bitmap.png"
+dest_files=["res://.godot/imported/blue-bitmap.png-819030d2697c1e7c98881ea6503ec494.res"]
+
+[params]
+
+create_from=0
+threshold=0.5
