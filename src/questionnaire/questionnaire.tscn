@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cre4qj00j1y0e"]
+[gd_scene load_steps=9 format=3 uid="uid://cre4qj00j1y0e"]
 
 [ext_resource type="Script" path="res://src/questionnaire/questionnaire.gd" id="1_lyaks"]
 [ext_resource type="Texture2D" uid="uid://crpiweohycjhl" path="res://assets/backgrounds/bg.png" id="2_p1nne"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dqq025dqhmh3i" path="res://assets/backgrounds/clouds.png" id="4_diebv"]
 [ext_resource type="PackedScene" uid="uid://c66enw53reggr" path="res://src/questionnaire/question/question_container.tscn" id="5_3id7h"]
 [ext_resource type="PackedScene" uid="uid://pme1hqw21lmb" path="res://src/questionnaire/answer_options/answer_options_container.tscn" id="5_k43jj"]
+[ext_resource type="PackedScene" uid="uid://vhg3u8nxp0wb" path="res://src/questionnaire/progress_bar/progress_bar.tscn" id="7_xcs0n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_meq7w"]
 shader = ExtResource("3_wh1li")
@@ -44,6 +45,8 @@ texture = ExtResource("4_diebv")
 
 [node name="QuestionContainer" parent="." instance=ExtResource("5_3id7h")]
 layout_mode = 1
+offset_top = 56.0
+offset_bottom = 431.0
 
 [node name="AnswerOptionsContainer" parent="." instance=ExtResource("5_k43jj")]
 layout_mode = 1
@@ -53,11 +56,25 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -528.0
-offset_top = -35.0
+offset_top = -10.0
 offset_right = 528.0
-offset_bottom = 365.0
+offset_bottom = 390.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ProgressBar" parent="." instance=ExtResource("7_xcs0n")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -657.5
+offset_top = 28.0
+offset_right = 657.5
+offset_bottom = 152.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(657, 62)
+mouse_filter = 2
 
 [node name="BlockControl" type="Control" parent="."]
 visible = false

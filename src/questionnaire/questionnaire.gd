@@ -7,6 +7,8 @@ class_name Questionnaire
 @onready var _minigame_start_message_container_scene = preload ("res://src/questionnaire/minigame_start_message_container/minigame_start_message_container.tscn")
 @onready var _onboarding_scene = preload ("res://src/questionnaire/onboarding/onboarding.tscn")
 @onready var _block_control: Control = $BlockControl
+@onready var _progress_bar: QuestionnaireProgressBar = $ProgressBar
+@onready var _questionnaire_ended_scene = preload ("res://src/questionnaire/questionnaire_ended/questionnaire_ended.tscn")
 
 var _questions: Array[String] = []
 var _current_question = 0
@@ -25,11 +27,13 @@ var _current_breakpoint: int = 0
 var _current_minigame: Minigame = null
 
 signal questions_answered(answers: Array[Dictionary])
+signal outro_played
 
 func _ready():
 	modulate = Color(0, 0, 0, 1)
 	_answer_options_container.modulate = Color(1, 1, 1, 0)
 	_question_container.modulate = Color(1, 1, 1, 0)
+	_progress_bar.modulate.a = 0
 
 	_answer_options_container.disable_options()
 	
@@ -76,6 +80,8 @@ func _change_to_next_question(answer: bool):
 		"answer": answer,
 		"timeTaken": time_taken
 	})
+	
+	_progress_bar.set_percent(float(_current_question)/float(_questions.size()))
 
 	if _current_breakpoint < _minigame_breakpoints.size() and _current_question + 1 == _minigame_breakpoints[_current_breakpoint]:
 		start_minigame()
@@ -83,6 +89,7 @@ func _change_to_next_question(answer: bool):
 	_current_question += 1
 	if _current_question >= _questions.size():
 		questions_answered.emit(_answers)
+		await _play_outro_animation()
 		return
 	_question_container.set_question(_questions[_current_question])
 
@@ -93,6 +100,7 @@ func play_intro_tween():
 	var intro_tween = create_tween().set_parallel(true)
 	intro_tween.tween_property(_answer_options_container, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE)
 	intro_tween.tween_property(_question_container, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE).set_delay(0.5)
+	intro_tween.tween_property(_progress_bar, "modulate:a", 1, 0.5).set_trans(Tween.TRANS_SINE).set_delay(0.5)
 	await intro_tween.finished
 
 	_answer_options_container.enable_options()
@@ -118,6 +126,8 @@ func start_minigame():
 
 	var minigame_tween = create_tween().set_parallel(true)
 	minigame_tween.tween_property(_current_minigame, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE)
+	await minigame_tween.finished
+	_block_control.visible = false
 
 func _on_question_changed():
 	_start_time = Time.get_ticks_msec()
@@ -130,3 +140,14 @@ func _on_minigame_ended():
 	await tween.finished
 	_block_control.visible = false
 	_start_time = Time.get_ticks_msec()
+
+func _play_outro_animation():
+	_block_control.visible = true
+	add_child(_questionnaire_ended_scene.instantiate())
+	$QuestionnaireEnded.entry_animation_tween()
+	await get_tree().create_timer(4).timeout
+
+	var outro_tween = create_tween().set_parallel(true)
+	outro_tween.tween_property(self, "position:y", -get_viewport_rect().size.y - 50, 1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
+	await outro_tween.finished
+	outro_played.emit()

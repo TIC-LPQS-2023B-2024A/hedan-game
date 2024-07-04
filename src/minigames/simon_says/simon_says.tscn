@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/minigames/simon_says/simon_says.gd" id="1_vm4nx"]
 [ext_resource type="PackedScene" uid="uid://cyniy16e83ywt" path="res://src/minigames/simon_says/buttons/buttons.tscn" id="2_336xl"]
-[ext_resource type="PackedScene" uid="uid://dwmuulj8804bn" path="res://rounds_counter.tscn" id="3_amia1"]
+[ext_resource type="PackedScene" uid="uid://dwmuulj8804bn" path="res://src/minigames/simon_says/rounds_counter/rounds_counter.tscn" id="3_i35ms"]
 
 [node name="SimonSays" type="Control"]
 layout_mode = 3
@@ -46,7 +46,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RoundsCounter" parent="." instance=ExtResource("3_amia1")]
+[node name="RoundsCounter" parent="." instance=ExtResource("3_i35ms")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

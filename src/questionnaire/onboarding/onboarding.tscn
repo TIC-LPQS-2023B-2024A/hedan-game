@@ -22,11 +22,12 @@ script = ExtResource("1_ju6de")
 [node name="GuiPanel" parent="." instance=ExtResource("1_w3pb2")]
 layout_mode = 1
 offset_left = 125.0
-offset_top = 150.0
+offset_top = 142.0
 offset_right = 1799.0
-offset_bottom = 1044.0
+offset_bottom = 1036.0
 
 [node name="FirstInstruction" type="Label" parent="GuiPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,18 +35,19 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -729.5
-offset_top = -237.5
+offset_top = -205.5
 offset_right = 729.5
-offset_bottom = 349.5
+offset_bottom = 381.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_do1gh")
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 48
 text = "Las oraciones que aparecen en este formulario dicen como piensan y sienten algunas personas acerca de ellas mismas. Lee con cuidado cada oración y luego selecciona la opción que corresponda a tu respuesta."
 autowrap_mode = 2
 clip_text = true
 
 [node name="SecondInstruction" type="Label" parent="GuiPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,72 +55,75 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -729.5
-offset_top = -237.5
+offset_top = -205.5
 offset_right = 729.5
-offset_bottom = 349.5
+offset_bottom = 381.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_do1gh")
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 48
 text = "Cuando respondas las preguntas escoje la carita feliz      , si piensas que así eres. Escoje la carita triste      , si crees que no eres así."
 autowrap_mode = 2
 clip_text = true
 
 [node name="HappyFaceMini" type="TextureRect" parent="GuiPanel/SecondInstruction"]
 layout_mode = 0
-offset_left = 123.5
-offset_top = 77.5
-offset_right = 523.5
-offset_bottom = 477.5
-scale = Vector2(0.2, 0.2)
+offset_left = 1319.5
+offset_top = 2.5
+offset_right = 1719.5
+offset_bottom = 402.5
+scale = Vector2(0.15, 0.15)
 texture = ExtResource("3_1uu0g")
 
 [node name="SadFaceMini" type="TextureRect" parent="GuiPanel/SecondInstruction"]
 layout_mode = 0
-offset_left = 154.5
-offset_top = 161.5
-offset_right = 554.5
-offset_bottom = 561.5
-scale = Vector2(0.2, 0.2)
+offset_left = 1035.5
+offset_top = 75.5
+offset_right = 1435.5
+offset_bottom = 475.5
+scale = Vector2(0.15, 0.15)
 texture = ExtResource("4_71npd")
 
 [node name="HappyFace" type="TextureRect" parent="GuiPanel/SecondInstruction"]
 layout_mode = 0
 offset_left = -7.5
-offset_top = 278.5
+offset_top = 229.5
 offset_right = 392.5
-offset_bottom = 678.5
+offset_bottom = 629.5
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_1uu0g")
 
 [node name="SadFace" type="TextureRect" parent="GuiPanel/SecondInstruction"]
 layout_mode = 0
 offset_left = 585.5
-offset_top = 284.5
+offset_top = 229.5
 offset_right = 985.5
-offset_bottom = 684.5
+offset_bottom = 629.5
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_71npd")
 
 [node name="IAm" type="Label" parent="GuiPanel/SecondInstruction"]
 layout_mode = 0
 offset_left = 238.5
-offset_top = 317.5
+offset_top = 299.5
 offset_right = 466.5
-offset_bottom = 408.5
+offset_bottom = 390.5
 theme = ExtResource("2_do1gh")
+theme_override_font_sizes/font_size = 48
 text = "Soy así"
 
 [node name="IAmNot" type="Label" parent="GuiPanel/SecondInstruction"]
 layout_mode = 0
 offset_left = 831.5
-offset_top = 320.5
+offset_top = 302.5
 offset_right = 1158.5
-offset_bottom = 411.5
+offset_bottom = 393.5
 theme = ExtResource("2_do1gh")
+theme_override_font_sizes/font_size = 48
 text = "No soy así"
 
 [node name="ThirdInstruction" type="Label" parent="GuiPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -126,16 +131,64 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -729.5
-offset_top = -237.5
+offset_top = -205.5
 offset_right = 729.5
-offset_bottom = 349.5
+offset_bottom = 381.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_do1gh")
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 48
 text = "Responde a cada oración, incluso si te resulta difícil elegir una respuesta que se aplique a ti. No hay respuestas correctas ni incorrectas, solo tú puedes decirnos como piensas y sientes con respecto a ti mismo."
 autowrap_mode = 2
 clip_text = true
+
+[node name="FourthInstruction" type="Label" parent="GuiPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -729.5
+offset_top = -205.5
+offset_right = 729.5
+offset_bottom = 381.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_do1gh")
+theme_override_font_sizes/font_size = 48
+text = "Cuando salga este mensaje en la pantalla, tendrás que completar un minijuego. ¡Diviértete!"
+autowrap_mode = 2
+clip_text = true
+
+[node name="MinigameStartMessage" type="RichTextLabel" parent="GuiPanel/FourthInstruction"]
+custom_minimum_size = Vector2(1500, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -750.0
+offset_top = -227.0
+offset_right = 750.0
+offset_bottom = 187.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.380392)
+theme_override_constants/shadow_offset_x = 20
+theme_override_constants/shadow_offset_y = 20
+theme_override_constants/shadow_outline_size = 20
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("4_rhpcd")
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "
+[rainbow freq=0.15 sat=0.65][center]¡Vamos a jugar![/center]
+ "
+fit_content = true
+scroll_active = false
 
 [node name="NextButton" parent="GuiPanel" instance=ExtResource("6_mwsb0")]
 layout_mode = 1
@@ -174,11 +227,15 @@ text = "Siguiente"
 script = ExtResource("8_4hvit")
 
 [node name="Ribbon" parent="." instance=ExtResource("3_nqkem")]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 31.0
-offset_right = 1903.0
-offset_bottom = 365.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -735.0
+offset_top = 39.0
+offset_right = 735.0
+offset_bottom = 373.0
+grow_horizontal = 2
 
 [node name="Title" type="Label" parent="Ribbon"]
 layout_mode = 1
@@ -194,10 +251,11 @@ offset_bottom = -41.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_rhpcd")
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 96
 text = "Instrucciones"
 
 [node name="BlockControl" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
