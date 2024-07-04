@@ -8,6 +8,8 @@ class_name Questionnaire
 @onready var _onboarding_scene = preload ("res://src/questionnaire/onboarding/onboarding.tscn")
 @onready var _block_control: Control = $BlockControl
 @onready var _progress_bar: QuestionnaireProgressBar = $ProgressBar
+@onready var _minigame_container: Control = $MinigameContainer
+
 @onready var _questionnaire_ended_scene = preload ("res://src/questionnaire/questionnaire_ended/questionnaire_ended.tscn")
 
 var _questions: Array[String] = []
@@ -119,10 +121,9 @@ func start_minigame():
 
 	_current_breakpoint += 1
 	_current_minigame = minigames[_current_breakpoint - 1].instantiate()
-	_current_minigame.position.y = get_viewport_rect().size.y + 50
 	_current_minigame.minigame_ended.connect(_on_minigame_ended)
 	_current_minigame.modulate = Color(1, 1, 1, 0)
-	add_child(_current_minigame)
+	_minigame_container.add_child(_current_minigame)
 
 	var minigame_tween = create_tween().set_parallel(true)
 	minigame_tween.tween_property(_current_minigame, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE)
