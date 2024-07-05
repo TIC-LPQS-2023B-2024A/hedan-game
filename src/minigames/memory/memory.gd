@@ -122,7 +122,7 @@ func _end_game():
 
 func _on_animation_finished(anim_name):
     if anim_name == "slide_transition":
-        if Global.game_count >= 2:
+        if Global.game_count >= 1:
             Global.game_count = 0
             minigame_ended.emit()
         else:
