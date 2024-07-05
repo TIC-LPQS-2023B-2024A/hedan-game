@@ -134,11 +134,11 @@ func _on_question_changed():
 	_start_time = Time.get_ticks_msec()
 
 func _on_minigame_ended():
-	if _current_minigame != null:
-		_current_minigame.queue_free()
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(self, "position:y", 0, 1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
 	await tween.finished
+	if _current_minigame != null:
+		_current_minigame.queue_free()
 	_block_control.visible = false
 	_start_time = Time.get_ticks_msec()
 

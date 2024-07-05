@@ -40,6 +40,9 @@ material = SubResource("ShaderMaterial_meq7w")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = -1197.0
+offset_right = 1197.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 texture = ExtResource("4_diebv")
 

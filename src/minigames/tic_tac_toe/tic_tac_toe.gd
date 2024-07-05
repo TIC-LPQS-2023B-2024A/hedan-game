@@ -12,6 +12,8 @@ var is_game_end: bool = false
 var transition_player: AnimationPlayer = null
 var reset_game_player: AnimationPlayer = null
 
+@onready var minigame_ended_message_scene: PackedScene = preload("res://src/common/messages/minigame_ended_message.tscn")
+
 func _ready():
     for cell_count in range(9):
         var cell = Cell.instantiate()
@@ -97,6 +99,7 @@ func _on_animation_player_animation_finished(anim_name):
     if anim_name == "slide_transition":
         if Global.game_count > 2:
             Global.game_count = 0
+            await _show_win_message()
             minigame_ended.emit()
         else:
             _reset_game()
@@ -110,3 +113,11 @@ func _reset_game():
     
     if transition_player:
         transition_player.play("new_game_init") 
+
+func _show_win_message():
+    var minigame_ended_message: MinigameEndedMessage = minigame_ended_message_scene.instantiate()
+    minigame_ended_message.main_text = "¡Gran juego!"
+    minigame_ended_message.message_text = "Fue una estrategia inteligente."
+    minigame_ended_message.position.x = get_viewport_rect().size.x
+    add_child(minigame_ended_message)
+    await minigame_ended_message.animation_tween().finished
