@@ -17,16 +17,13 @@ var _current_question = 0
 var _answers: Array[Dictionary] = []
 var _start_time: int = 0
 
-@export var minigames: Array[PackedScene] = [
-	preload ("res://src/minigames/memory/memory.tscn"),
-	preload ("res://src/minigames/coin_collector/coin_collector.tscn"),
-	preload ("res://src/minigames/tic_tac_toe/tic_tac_toe.tscn"),
-	preload ("res://src/minigames/simon_says/simon_says.tscn"),
-]
+var _minigames: Array[String] = MinigamesConstants.minigames
 
-const _minigame_breakpoints: Array[int] = [10, 20, 30, 40]
 var _current_breakpoint: int = 0
+var _current_minigame_name: String
 var _current_minigame: Minigame = null
+var _current_minigame_tutorial: MinigameTutorial = null
+@onready var _minigame_tutorial_scene = preload ("res://src/common/minigame_tutorial/minigame_tutorial.tscn")
 
 signal questions_answered(answers: Array[Dictionary])
 signal outro_played
@@ -83,10 +80,10 @@ func _change_to_next_question(answer: bool):
 		"timeTaken": time_taken
 	})
 	
-	_progress_bar.set_percent(float(_current_question)/float(_questions.size()))
+	_progress_bar.set_percent(float(_current_question) / float(_questions.size()))
 
-	if _current_breakpoint < _minigame_breakpoints.size() and _current_question + 1 == _minigame_breakpoints[_current_breakpoint]:
-		start_minigame()
+	if _current_breakpoint < MinigamesConstants.minigame_breakpoints.size() and _current_question + 1 == MinigamesConstants.minigame_breakpoints[_current_breakpoint]:
+		_start_minigame_tutorial()
 
 	_current_question += 1
 	if _current_question >= _questions.size():
@@ -107,7 +104,7 @@ func play_intro_tween():
 
 	_answer_options_container.enable_options()
 
-func start_minigame():
+func _start_minigame_tutorial():
 	_block_control.visible = true
 	var minigame_start_message = _minigame_start_message_container_scene.instantiate()
 	minigame_start_message.position = Vector2(0, 0)
@@ -120,7 +117,21 @@ func start_minigame():
 	minigame_start_message.queue_free()
 
 	_current_breakpoint += 1
-	_current_minigame = minigames[_current_breakpoint - 1].instantiate()
+	_current_minigame_name = _minigames[_current_breakpoint - 1]
+	
+	_current_minigame_tutorial = _minigame_tutorial_scene.instantiate()
+	_current_minigame_tutorial.minigame_name = MinigamesConstants.minigames_names[_current_minigame_name]
+	_current_minigame_tutorial.minigame_video = MinigamesConstants.minigames_tutorial_videos[_current_minigame_name]
+	_current_minigame_tutorial.how_to_play_text = MinigamesConstants.minigames_how_to_play_texts[_current_minigame_name]
+	_current_minigame_tutorial.goal_text = MinigamesConstants.minigames_goals_texts[_current_minigame_name]
+	_current_minigame_tutorial.tutorial_ended.connect(_on_minigame_tutorial_ended)
+
+	_minigame_container.add_child(_current_minigame_tutorial)
+	await _current_minigame_tutorial.play_intro_tween().finished
+	_block_control.visible = false
+
+func _start_current_minigame():
+	_current_minigame = MinigamesConstants.minigames_packed_scenes[_current_minigame_name].instantiate()
 	_current_minigame.minigame_ended.connect(_on_minigame_ended)
 	_current_minigame.modulate = Color(1, 1, 1, 0)
 	_minigame_container.add_child(_current_minigame)
@@ -128,10 +139,15 @@ func start_minigame():
 	var minigame_tween = create_tween().set_parallel(true)
 	minigame_tween.tween_property(_current_minigame, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE)
 	await minigame_tween.finished
-	_block_control.visible = false
 
 func _on_question_changed():
 	_start_time = Time.get_ticks_msec()
+
+func _on_minigame_tutorial_ended():
+	await _current_minigame_tutorial.outro_tween().finished
+	_current_minigame_tutorial.queue_free()
+	_current_minigame_tutorial = null
+	await _start_current_minigame()
 
 func _on_minigame_ended():
 	var tween = create_tween().set_parallel(true)

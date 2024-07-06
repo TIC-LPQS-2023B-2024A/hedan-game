@@ -42,7 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_do1gh")
 theme_override_font_sizes/font_size = 48
-text = "Las oraciones que aparecen en este formulario dicen como piensan y sienten algunas personas acerca de ellas mismas. Lee con cuidado cada oración y luego selecciona la opción que corresponda a tu respuesta."
+text = "¡Vamos a jugar un juego divertido para conocerte mejor! A continuación, tendrás algunas preguntas. ¿Estás listo para empezar? ¡Vamos allá! "
 autowrap_mode = 2
 clip_text = true
 
@@ -138,31 +138,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_do1gh")
 theme_override_font_sizes/font_size = 48
-text = "Responde a cada oración, incluso si te resulta difícil elegir una respuesta que se aplique a ti. No hay respuestas correctas ni incorrectas, solo tú puedes decirnos como piensas y sientes con respecto a ti mismo."
+text = "A medida que avances aparecerán varios minijuegos desafiantes con el siguiente mensaje. ¡Diviértete!"
 autowrap_mode = 2
 clip_text = true
 
-[node name="FourthInstruction" type="Label" parent="GuiPanel"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -729.5
-offset_top = -205.5
-offset_right = 729.5
-offset_bottom = 381.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_do1gh")
-theme_override_font_sizes/font_size = 48
-text = "Cuando salga este mensaje en la pantalla, tendrás que completar un minijuego. ¡Diviértete!"
-autowrap_mode = 2
-clip_text = true
-
-[node name="MinigameStartMessage" type="RichTextLabel" parent="GuiPanel/FourthInstruction"]
+[node name="MinigameStartMessage" type="RichTextLabel" parent="GuiPanel/ThirdInstruction"]
 custom_minimum_size = Vector2(1500, 0)
 layout_mode = 1
 anchors_preset = 8

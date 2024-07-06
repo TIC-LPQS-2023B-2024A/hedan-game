@@ -7,7 +7,6 @@ signal onboarding_ended
 @onready var _first_instruction: Label = $GuiPanel/FirstInstruction
 @onready var _second_instruction: Label = $GuiPanel/SecondInstruction
 @onready var _third_instruction: Label = $GuiPanel/ThirdInstruction
-@onready var _fourth_instruction: Label = $GuiPanel/FourthInstruction
 @onready var _block_control: Control = $BlockControl
 @onready var _next_button_label: Label = $GuiPanel/NextButton/Label
 
@@ -19,8 +18,7 @@ func _ready() -> void:
 	_instructions = [
 		_first_instruction,
 		_second_instruction,
-		_third_instruction,
-		_fourth_instruction
+		_third_instruction
 	]
 	for instruction in _instructions:
 		instruction.visible = false
