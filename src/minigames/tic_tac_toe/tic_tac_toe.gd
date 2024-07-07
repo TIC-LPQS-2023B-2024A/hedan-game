@@ -12,7 +12,7 @@ var is_game_end: bool = false
 var transition_player: AnimationPlayer = null
 var reset_game_player: AnimationPlayer = null
 
-@onready var minigame_ended_message_scene: PackedScene = preload("res://src/common/messages/minigame_ended_message.tscn")
+@onready var minigame_ended_message_scene: PackedScene = preload ("res://src/common/messages/minigame_ended_message.tscn")
 
 func _ready():
     for cell_count in range(9):
@@ -42,6 +42,7 @@ func _on_cell_updated(cell):
     elif play_with == "AI" and turn == 1:
         var ai_cell = cells[randi() % cells.size()]
         if ai_cell.cell_value == "":
+            SfxPlayer.play_sfx("card.wav", -12)
             ai_cell.draw_cell()
         else:
             _on_cell_updated(cell)
@@ -77,6 +78,7 @@ func check_match():
     if full: return ["Draw", 0, 0, 0]
 
 func start_win_animation(match_result: Array):
+    SfxPlayer.play_sfx("game_got.wav")
     var color: Color
     
     if match_result[0] == "X":
@@ -112,9 +114,10 @@ func _reset_game():
         cell.reset() # Llama a la función reset() en cada celda
     
     if transition_player:
-        transition_player.play("new_game_init") 
+        transition_player.play("new_game_init")
 
 func _show_win_message():
+    BgmPlayer.stop_bgm(0.5)
     var minigame_ended_message: MinigameEndedMessage = minigame_ended_message_scene.instantiate()
     minigame_ended_message.main_text = "¡Gran juego!"
     minigame_ended_message.message_text = "Fue una estrategia inteligente."

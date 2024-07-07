@@ -38,5 +38,6 @@ func _on_chest_coin_collected():
         _coin_generator.queue_free()
         return
 
+    SfxPlayer.play_sfx("coin_collector/coin.mp3", -1)
     _score += 1
     score_updated.emit(_score)

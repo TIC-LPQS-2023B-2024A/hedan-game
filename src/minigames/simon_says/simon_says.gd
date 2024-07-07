@@ -20,6 +20,7 @@ const colors: Array[ButtonColor] = [ButtonColor.BLUE, ButtonColor.GREEN, ButtonC
 
 func _ready() -> void:
     _block_control.visible = true
+    BgmPlayer.volume_db = -30
     await _new_round()
 
 func add_to_sequence(color: ButtonColor):
@@ -29,6 +30,7 @@ func _on_buttons_color_selected(color: ButtonColor):
     _played_sequence.append(color)
 
     if(_played_sequence[_played_sequence.size() - 1] != _sequence[_played_sequence.size() - 1]):
+        SfxPlayer.play_sfx("error.wav")
         await _buttons.play_on_wrong_sequence()
 
     if _played_sequence.size() == _sequence.size():
@@ -72,6 +74,7 @@ func _new_round():
     _block_control.visible = false
 
 func _show_win_message():
+    BgmPlayer.stop_bgm(0.5)
     var minigame_ended_message: MinigameEndedMessage = _minigame_ended_message_scene.instantiate()
     minigame_ended_message.main_text = "¡Bien hecho!"
     minigame_ended_message.message_text = "Ha sido una excelente partida."

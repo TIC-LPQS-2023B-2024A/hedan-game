@@ -43,7 +43,6 @@ func _ready():
 	var intro_tween = create_tween().set_parallel(false)
 	intro_tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE)
 	await intro_tween.finished
-
 	add_child(_onboarding_scene.instantiate())
 	($Onboarding as Onboarding).onboarding_ended.connect(_on_onboarding_ended)
 
@@ -59,12 +58,14 @@ func _parse_csv_to_questions(file_path: String) -> Array[String]:
 	return questions_array
 
 func _on_onboarding_ended():
+	BgmPlayer.stop_bgm(0.5)
 	var onboarding_ended_tween = create_tween().set_parallel(false)
 	onboarding_ended_tween.tween_property($Onboarding, "modulate:a", 0, 0.5).set_trans(Tween.TRANS_SINE)
 	await onboarding_ended_tween.finished
 	$Onboarding.queue_free()
 
 	await play_intro_tween()
+	QuestionnaireBgmPlayer.play_bgm()
 	_start_time = Time.get_ticks_msec()
 	_question_container.question_changed.connect(_on_question_changed)
 	_block_control.visible = false
@@ -82,7 +83,9 @@ func _change_to_next_question(answer: bool):
 	
 	_progress_bar.set_percent(float(_current_question) / float(_questions.size()))
 
-	if _current_breakpoint < MinigamesConstants.minigame_breakpoints.size() and _current_question + 1 == MinigamesConstants.minigame_breakpoints[_current_breakpoint]:
+	var should_play_minigame = _current_breakpoint < MinigamesConstants.minigame_breakpoints.size() and _current_question + 1 == MinigamesConstants.minigame_breakpoints[_current_breakpoint]
+	
+	if should_play_minigame:
 		_start_minigame_tutorial()
 
 	_current_question += 1
@@ -90,9 +93,15 @@ func _change_to_next_question(answer: bool):
 		questions_answered.emit(_answers)
 		await _play_outro_animation()
 		return
+
+	await _question_container.out_question_tween().finished
 	_question_container.set_question(_questions[_current_question])
 
+	if !should_play_minigame:
+		await _question_container.in_question_tween().finished
+
 func _on_option_pressed(answer: bool):
+	SfxPlayer.play_sfx("button.mp3", -5)
 	_change_to_next_question(answer)
 
 func play_intro_tween():
@@ -109,6 +118,12 @@ func _start_minigame_tutorial():
 	var minigame_start_message = _minigame_start_message_container_scene.instantiate()
 	minigame_start_message.position = Vector2(0, 0)
 	add_child(minigame_start_message)
+	SfxPlayer.play_sfx("game_time.mp3", -10)
+
+	var modulate_tween = create_tween().set_parallel(true)
+	modulate_tween.tween_property(_progress_bar, "modulate:a", 0, 0.5).set_trans(Tween.TRANS_SINE).set_delay(1)
+	modulate_tween.tween_property(_answer_options_container, "modulate", Color(1, 1, 1, 0), 0.5).set_trans(Tween.TRANS_SINE).set_delay(1)
+	await QuestionnaireBgmPlayer.volume_down(0.5)
 	await get_tree().create_timer(4).timeout
 
 	var tween = create_tween().set_parallel(true)
@@ -128,6 +143,7 @@ func _start_minigame_tutorial():
 
 	_minigame_container.add_child(_current_minigame_tutorial)
 	await _current_minigame_tutorial.play_intro_tween().finished
+	BgmPlayer.play_bgm("tutorial.mp3")
 	_block_control.visible = false
 
 func _start_current_minigame():
@@ -139,11 +155,13 @@ func _start_current_minigame():
 	var minigame_tween = create_tween().set_parallel(true)
 	minigame_tween.tween_property(_current_minigame, "modulate", Color(1, 1, 1, 1), 0.5).set_trans(Tween.TRANS_SINE)
 	await minigame_tween.finished
+	BgmPlayer.play_bgm(MinigamesConstants.minigames_bgms_file_names[_current_minigame_name])
 
 func _on_question_changed():
 	_start_time = Time.get_ticks_msec()
 
 func _on_minigame_tutorial_ended():
+	BgmPlayer.stop_bgm(0.5)
 	await _current_minigame_tutorial.outro_tween().finished
 	_current_minigame_tutorial.queue_free()
 	_current_minigame_tutorial = null
@@ -151,14 +169,20 @@ func _on_minigame_tutorial_ended():
 
 func _on_minigame_ended():
 	var tween = create_tween().set_parallel(true)
+
+	QuestionnaireBgmPlayer.volume_up(1.5)
 	tween.tween_property(self, "position:y", 0, 1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
 	await tween.finished
 	if _current_minigame != null:
 		_current_minigame.queue_free()
 	_block_control.visible = false
-	_start_time = Time.get_ticks_msec()
+	_question_container.in_question_tween()
+	var modulate_tween = create_tween().set_parallel(true)
+	modulate_tween.tween_property(_progress_bar, "modulate:a", 1, 0.5).set_trans(Tween.TRANS_SINE)
+	modulate_tween.tween_property(_answer_options_container, "modulate:a", 1, 0.5).set_trans(Tween.TRANS_SINE)
 
 func _play_outro_animation():
+	QuestionnaireBgmPlayer.volume_down(1)
 	_block_control.visible = true
 	add_child(_questionnaire_ended_scene.instantiate())
 	$QuestionnaireEnded.entry_animation_tween()

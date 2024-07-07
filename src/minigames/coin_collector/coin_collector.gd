@@ -17,6 +17,7 @@ func _on_coin_collector_main_2d_score_updated(score:int):
 	_score_label.text = "%d" % (score)
 
 func _show_win_message():
+	BgmPlayer.stop_bgm(1.5)
 	var minigame_ended_message: MinigameEndedMessage = _minigame_ended_message_scene.instantiate()
 	minigame_ended_message.main_text = "¡Genial!"
 	minigame_ended_message.message_text = "Has recolectado muchas monedas."

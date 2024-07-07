@@ -11,6 +11,7 @@ signal tutorial_ended
 
 @onready var _how_to_play_label: Label = $GuiPanel/VBoxContainer/VBoxContainer/HowToPlayLabel
 @onready var _goal_label: Label = $GuiPanel/VBoxContainer/GoalLabel
+@onready var _gui_button: TextureButton = $GuiPanel/GuiButton
 
 func _ready():
     ($GuiPanel/Ribbon/Label as Label).text = minigame_name
@@ -33,4 +34,9 @@ func outro_tween() -> Tween:
     return tween
 
 func _on_gui_button_pressed():
+    SfxPlayer.play_sfx("start.mp3", -10)
     tutorial_ended.emit()
+    _gui_button.disabled = true
+    _gui_button.remove_child($GuiPanel/GuiButton/CursorChanger)
+    _gui_button.pressed.disconnect(_on_gui_button_pressed)
+

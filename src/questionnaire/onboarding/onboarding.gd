@@ -9,6 +9,7 @@ signal onboarding_ended
 @onready var _third_instruction: Label = $GuiPanel/ThirdInstruction
 @onready var _block_control: Control = $BlockControl
 @onready var _next_button_label: Label = $GuiPanel/NextButton/Label
+@onready var _next_button: TextureButton = $GuiPanel/NextButton
 
 var _instructions: Array[Label] = []
 
@@ -38,8 +39,9 @@ func _ready() -> void:
 	_block_control.visible = false
 
 func _on_next_button_pressed():
-	if _current_instruction == _instructions.size() - 2:
-		_next_button_label.text = "¡Empecemos!"
+	_update_text_label()
+
+	_play_button_sfx()
 
 	_block_control.visible = true
 	var tween = get_tree().create_tween()
@@ -48,6 +50,8 @@ func _on_next_button_pressed():
 
 	if _current_instruction == _instructions.size() - 1:
 		onboarding_ended.emit()
+		_next_button.disabled = true
+		_next_button.pressed.disconnect(_on_next_button_pressed)
 		return
 
 	_current_instruction += 1
@@ -57,3 +61,10 @@ func _on_next_button_pressed():
 	await tween.finished
 
 	_block_control.visible = false
+
+func _play_button_sfx() -> void:
+	SfxPlayer.play_sfx("button.mp3", -5)
+
+func _update_text_label():
+	if _current_instruction == _instructions.size() - 2:
+		_next_button_label.text = "¡Empecemos!"

@@ -15,6 +15,7 @@ func _ready() -> void:
     scale = Vector2(0, 0)
 
 func animation_tween() -> Tween:
+    SfxPlayer.play_sfx("win.mp3", -8)
     var tween = get_tree().create_tween().set_parallel(true)
     tween.tween_property(self, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
     tween.tween_property(self, "scale", Vector2(1, 1), 5).set_delay(0.3)

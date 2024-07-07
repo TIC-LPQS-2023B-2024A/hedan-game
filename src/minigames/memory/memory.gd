@@ -80,6 +80,7 @@ func _assign_image_and_name(card, image, card_name):
 
 func _check_if_pair():
 	if get_node("CardOneName").text == get_node("CardTwoName").text:
+		SfxPlayer.play_sfx("game_got.wav")
 		get_node("CheckBox").text = "="
 		last_try_was_pair = true
 		number_of_matches += 1
@@ -149,6 +150,7 @@ func _turn_around_all_cards():
 		get_node("Card"+ str(i)).get_node("Sprite").texture = default_image
 
 func _show_win_message():
+	BgmPlayer.stop_bgm(0.5)
 	var minigame_ended_message: MinigameEndedMessage = _minigame_ended_message_scene.instantiate()
 	minigame_ended_message.main_text = "¡Muy bien!"
 	minigame_ended_message.message_text = "Tienes una memoria increíble."

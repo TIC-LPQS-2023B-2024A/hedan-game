@@ -36,8 +36,8 @@ const minigames_how_to_play_texts = {
 }
 
 const minigames_goals_texts = {
-    memory: "Recoje 100 monedas para ganar.",
-    coin_collector: "Encuentra todas las parejas de cartas iguales.",
+    memory: "Encuentra todas las parejas de cartas iguales.",
+    coin_collector: "Recoje 100 monedas para ganar.",
     tic_tac_toe: "",
     simon_says: "Completa 5 secuencias de sonidos para conseguir la victoria."
 }
@@ -47,6 +47,13 @@ const minigames_tutorial_videos = {
     coin_collector: preload("res://assets/tutorials/coin_collector.ogv"),
     tic_tac_toe: preload("res://assets/tutorials/tic_tac_toe.ogv"),
     simon_says: preload("res://assets/tutorials/simon_says.ogv"),
+}
+
+const minigames_bgms_file_names = {
+    memory: "memory.mp3",
+    coin_collector: "coin_collector.mp3",
+    tic_tac_toe: "tic_tac_toe.mp3",
+    simon_says: "simon_says.mp3",
 }
 
 const minigame_breakpoints: Array[int] = [10, 20, 30, 40]
