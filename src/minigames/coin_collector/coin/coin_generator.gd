@@ -28,3 +28,9 @@ func _on_timer_timeout() -> void:
 
 func start_coins_spawn() -> void:
     $Timer.start()
+
+func stop_coins_spawn() -> void:
+    $Timer.stop()
+    var tween = get_tree().create_tween().set_parallel(false)
+    tween.tween_property(self, "modulate:a", 0.0, 0.5)
+    await tween.finished

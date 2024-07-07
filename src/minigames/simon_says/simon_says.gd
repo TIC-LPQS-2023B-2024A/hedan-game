@@ -6,6 +6,8 @@ class_name SimonSaysMinigame
 @onready var _block_control: Control = $BlockControl
 @onready var _attention_background: ColorRect = $AttentionBackground
 @onready var _rounds_counter: RoundsCounter = $RoundsCounter
+@onready var _minigame_ended_message_scene: PackedScene = preload("res://src/common/messages/minigame_ended_message.tscn")
+
 @export var max_rounds: int = 0
 var _played_sequence: Array[ButtonColor] = []
 var _played_correctly: bool = true
@@ -18,6 +20,7 @@ const colors: Array[ButtonColor] = [ButtonColor.BLUE, ButtonColor.GREEN, ButtonC
 
 func _ready() -> void:
     _block_control.visible = true
+    BgmPlayer.volume_db = -30
     await _new_round()
 
 func add_to_sequence(color: ButtonColor):
@@ -27,6 +30,7 @@ func _on_buttons_color_selected(color: ButtonColor):
     _played_sequence.append(color)
 
     if(_played_sequence[_played_sequence.size() - 1] != _sequence[_played_sequence.size() - 1]):
+        SfxPlayer.play_sfx("error.wav")
         await _buttons.play_on_wrong_sequence()
 
     if _played_sequence.size() == _sequence.size():
@@ -51,6 +55,7 @@ func _new_round():
             _rounds_counter.set_current_round(current_round - 1, RoundStatus.Status.LOST)
 
     if current_round >= max_rounds:
+        await _show_win_message()
         minigame_ended.emit()
         return
 
@@ -67,3 +72,11 @@ func _new_round():
     attention_background_tween.tween_property(_attention_background, "color", Color(0, 0, 0, 0), 0.25)
     await attention_background_tween.finished
     _block_control.visible = false
+
+func _show_win_message():
+    BgmPlayer.stop_bgm(0.5)
+    var minigame_ended_message: MinigameEndedMessage = _minigame_ended_message_scene.instantiate()
+    minigame_ended_message.main_text = "¡Bien hecho!"
+    minigame_ended_message.message_text = "Ha sido una excelente partida."
+    add_child(minigame_ended_message)
+    await minigame_ended_message.animation_tween().finished

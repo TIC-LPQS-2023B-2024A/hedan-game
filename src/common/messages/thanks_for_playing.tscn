@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://l7yadhov768w"]
+
+[ext_resource type="FontFile" uid="uid://4y22whsnw4fa" path="res://assets/fonts/TitanOne-Regular.ttf" id="1_alude"]
+
+[node name="ThanksForPlaying" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 84.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.376471)
+theme_override_constants/shadow_offset_x = 13
+theme_override_constants/shadow_offset_y = 9
+theme_override_fonts/font = ExtResource("1_alude")
+theme_override_font_sizes/font_size = 148
+text = "¡Felicitaciones!"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -581.0
+offset_top = 203.0
+offset_right = 581.0
+offset_bottom = 286.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.376471)
+theme_override_constants/shadow_offset_x = 13
+theme_override_constants/shadow_offset_y = 9
+theme_override_fonts/font = ExtResource("1_alude")
+theme_override_font_sizes/font_size = 72
+text = "Has logrado terminar el juego"

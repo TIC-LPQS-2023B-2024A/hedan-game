@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvuoem26hoq32"]
+
+[ext_resource type="Texture2D" uid="uid://de2mfiwqriv61" path="res://assets/gui/Ribbon.png" id="1_vhx15"]
+
+[node name="Ribbon" type="NinePatchRect"]
+offset_right = 563.0
+offset_bottom = 213.0
+texture = ExtResource("1_vhx15")
+patch_margin_left = 258
+patch_margin_top = 51
+patch_margin_right = 305
+patch_margin_bottom = 162

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bms252q7tfcmg"]
+
+[ext_resource type="Texture2D" uid="uid://bi7dk2wllybpq" path="res://assets/gui/button.png" id="1_hjglc"]
+
+[node name="GuiButton" type="TextureButton"]
+texture_normal = ExtResource("1_hjglc")

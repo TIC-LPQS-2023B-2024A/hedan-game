@@ -14,6 +14,7 @@ func _input_event(_viewport, event, _shape_idx):
 
 func on_click():
     if click_enabled:
+        SfxPlayer.play_sfx("card.wav", -12)
         click_enabled = false
         get_node("Sprite").texture = card_face
         _handle_card_click()

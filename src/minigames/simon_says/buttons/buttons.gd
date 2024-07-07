@@ -16,21 +16,33 @@ signal color_selected(color: SimonSaysMinigame.ButtonColor)
     SimonSaysMinigame.ButtonColor.YELLOW: _yellow_button
 }
 
+const _colors_names = {
+    SimonSaysMinigame.ButtonColor.BLUE: "blue",
+    SimonSaysMinigame.ButtonColor.GREEN: "green",
+    SimonSaysMinigame.ButtonColor.RED: "red",
+    SimonSaysMinigame.ButtonColor.YELLOW: "yellow"
+}
+
 func play_sequence(sequence: Array[SimonSaysMinigame.ButtonColor]):
     for color in sequence:
+        SfxPlayer.play_sfx("simon_says/%s.mp3" % _colors_names[color])
         await _buttons_colors[color].play_active_animation()
         await get_tree().create_timer(0.2).timeout
 
 func _on_green_sequence_button_pressed():
+    SfxPlayer.play_sfx("simon_says/green.mp3")
     color_selected.emit(SimonSaysMinigame.ButtonColor.GREEN)
 
 func _on_yellow_sequence_button_pressed():
+    SfxPlayer.play_sfx("simon_says/yellow.mp3")
     color_selected.emit(SimonSaysMinigame.ButtonColor.YELLOW)
 
 func _on_red_sequence_button_pressed():
+    SfxPlayer.play_sfx("simon_says/red.mp3")
     color_selected.emit(SimonSaysMinigame.ButtonColor.RED)
 
 func _on_blue_sequence_button_pressed():
+    SfxPlayer.play_sfx("simon_says/blue.mp3")
     color_selected.emit(SimonSaysMinigame.ButtonColor.BLUE)
 
 func play_on_wrong_sequence():
