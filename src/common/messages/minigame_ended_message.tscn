@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://csbjhfd8xjiho"]
+
+[ext_resource type="Script" path="res://src/common/messages/minigame_ended_message.gd" id="1_87iqh"]
+[ext_resource type="FontFile" uid="uid://4y22whsnw4fa" path="res://assets/fonts/TitanOne-Regular.ttf" id="2_6apcl"]
+
+[node name="MinigameEndedMessage" type="Control"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_87iqh")
+
+[node name="MainText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -492.0
+offset_top = -124.5
+offset_right = 492.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.356863, 0.764706, 0.827451, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.376471)
+theme_override_colors/font_outline_color = Color(0.870588, 0.952941, 0.964706, 1)
+theme_override_constants/shadow_offset_x = 13
+theme_override_constants/shadow_offset_y = 9
+theme_override_constants/outline_size = 40
+theme_override_fonts/font = ExtResource("2_6apcl")
+theme_override_font_sizes/font_size = 150
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -735.5
+offset_top = 52.0
+offset_right = 735.5
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.376471)
+theme_override_constants/shadow_offset_x = 13
+theme_override_constants/shadow_offset_y = 9
+theme_override_fonts/font = ExtResource("2_6apcl")
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1

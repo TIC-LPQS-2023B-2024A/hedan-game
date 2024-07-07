@@ -11,6 +11,7 @@ func _ready():
     _original_idle_texture = texture_normal
 
 func play_active_animation():
+
     if _tween != null:
         _tween.kill()
         scale = Vector2(1, 1)
@@ -24,7 +25,6 @@ func play_active_animation():
     _tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT).set_delay(0.3)
     await _tween.finished
     texture_normal = _original_idle_texture
-
 
 func _on_pressed():
     await play_active_animation()

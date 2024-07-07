@@ -1,17 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cl1n3v1tx8the"]
+[gd_scene load_steps=3 format=3 uid="uid://cl1n3v1tx8the"]
 
 [ext_resource type="Script" path="res://src/game.gd" id="1_nuib6"]
 [ext_resource type="PackedScene" uid="uid://cre4qj00j1y0e" path="res://src/questionnaire/questionnaire.tscn" id="2_lfswa"]
-[ext_resource type="Shader" path="res://src/intro/intro.gdshader" id="3_535wp"]
-[ext_resource type="Texture2D" uid="uid://crpiweohycjhl" path="res://assets/backgrounds/bg.png" id="4_w3xq0"]
-[ext_resource type="FontFile" uid="uid://4y22whsnw4fa" path="res://assets/fonts/TitanOne-Regular.ttf" id="5_5hnec"]
-[ext_resource type="Texture2D" uid="uid://blg3cg1naay1o" path="res://assets/intro/buttom_play.png" id="6_fgf25"]
-[ext_resource type="Script" path="res://src/intro/intro.gd" id="7_4u1y5"]
-[ext_resource type="FontFile" uid="uid://bxd7cgpuhmv3g" path="res://assets/fonts/Poppins-Medium.ttf" id="8_224u0"]
-[ext_resource type="Script" path="res://src/common/behaviours/cursor_changer.gd" id="9_trshh"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_18dlg"]
-shader = ExtResource("3_535wp")
 
 [node name="Game" type="Node"]
 script = ExtResource("1_nuib6")
@@ -21,65 +11,14 @@ questionnaire_scene = ExtResource("2_lfswa")
 
 [node name="SendAnswersRequest" type="HTTPRequest" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="."]
-texture_repeat = 2
-material = SubResource("ShaderMaterial_18dlg")
-offset_top = -719.0
-offset_right = 1920.0
-offset_bottom = 1681.0
-texture = ExtResource("4_w3xq0")
-
-[node name="Title" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -619.5
-offset_top = 70.0
-offset_right = 619.5
-offset_bottom = 472.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("5_5hnec")
-theme_override_font_sizes/font_size = 350
-text = "HEDAN"
-
-[node name="TextureButton" type="TextureButton" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -257.0
-offset_top = -387.0
-offset_right = 246.0
-offset_bottom = -214.0
-grow_horizontal = 2
-grow_vertical = 0
-texture_normal = ExtResource("6_fgf25")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("7_4u1y5")
-
-[node name="Play" type="Label" parent="TextureButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -126.0
-offset_top = -60.0
-offset_right = 126.0
-offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("8_224u0")
-theme_override_font_sizes/font_size = 85
-text = "Jugar"
-
-[node name="CursorChanger" type="Node" parent="TextureButton"]
-script = ExtResource("9_trshh")
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="request_completed" from="ValidateTokenRequest" to="." method="_on_validate_token_request_request_completed"]
 [connection signal="request_completed" from="SendAnswersRequest" to="." method="_on_send_answers_request_request_completed"]
-[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]

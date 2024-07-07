@@ -18,6 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://src/common/behaviours/global.gd"
+BgmPlayer="*res://src/common/autoloads/bgm_player.tscn"
+QuestionnaireBgmPlayer="*res://src/common/autoloads/questionnaire_bgm_player.tscn"
+SfxPlayer="*res://src/common/autoloads/sfx_player.tscn"
 
 [display]
 

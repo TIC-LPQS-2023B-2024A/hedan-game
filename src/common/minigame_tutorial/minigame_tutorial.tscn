@@ -1,0 +1,196 @@
+[gd_scene load_steps=9 format=3 uid="uid://ii70csqaqy1p"]
+
+[ext_resource type="Script" path="res://src/common/minigame_tutorial/minigame_tutorial.gd" id="1_ayf2r"]
+[ext_resource type="PackedScene" uid="uid://cq2qq4s7gmj6j" path="res://src/common/gui/gui_panel.tscn" id="2_fng5q"]
+[ext_resource type="PackedScene" uid="uid://dvuoem26hoq32" path="res://src/common/gui/ribbon.tscn" id="3_jmpse"]
+[ext_resource type="FontFile" uid="uid://4y22whsnw4fa" path="res://assets/fonts/TitanOne-Regular.ttf" id="4_jo4s8"]
+[ext_resource type="PackedScene" uid="uid://bms252q7tfcmg" path="res://src/common/gui/button.tscn" id="4_oo7od"]
+[ext_resource type="Script" path="res://src/common/behaviours/cursor_changer.gd" id="5_5afke"]
+[ext_resource type="FontFile" uid="uid://bxd7cgpuhmv3g" path="res://assets/fonts/Poppins-Medium.ttf" id="5_8yqi8"]
+[ext_resource type="Theme" uid="uid://dstxhsipc4oib" path="res://assets/themes/question_theme.tres" id="8_yewod"]
+
+[node name="MinigameTutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ayf2r")
+
+[node name="GuiPanel" parent="." instance=ExtResource("2_fng5q")]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 139.0
+offset_right = 959.0
+offset_bottom = 1011.0
+
+[node name="Ribbon" parent="GuiPanel" instance=ExtResource("3_jmpse")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -488.5
+offset_top = -66.0
+offset_right = 1139.5
+offset_bottom = 296.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+
+[node name="Label" type="Label" parent="GuiPanel/Ribbon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.667
+offset_top = -126.0
+offset_right = 395.333
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_jo4s8")
+theme_override_font_sizes/font_size = 90
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GuiButton" parent="GuiPanel" instance=ExtResource("4_oo7od")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.5
+offset_top = -201.0
+offset_right = 445.5
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+
+[node name="CursorChanger" type="Node" parent="GuiPanel/GuiButton"]
+script = ExtResource("5_5afke")
+
+[node name="Label" type="Label" parent="GuiPanel/GuiButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -25.5
+offset_right = 48.5
+offset_bottom = -2.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_jo4s8")
+theme_override_font_sizes/font_size = 80
+text = "¡Juguemos!"
+
+[node name="Label" type="Label" parent="GuiPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -319.5
+offset_top = -244.0
+offset_right = 319.5
+offset_bottom = -198.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 0.635294)
+theme_override_fonts/font = ExtResource("5_8yqi8")
+theme_override_font_sizes/font_size = 24
+text = "Presiona el botón para empezar a jugar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Instructions" type="Label" parent="GuiPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_8yqi8")
+theme_override_font_sizes/font_size = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -336.5
+offset_top = -279.0
+offset_right = 336.5
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="HowToPlay" type="Label" parent="GuiPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_yewod")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 40
+text = "¿Cómo jugar?"
+
+[node name="HowToPlayLabel" type="Label" parent="GuiPanel/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(673, 0)
+layout_mode = 2
+theme = ExtResource("8_yewod")
+theme_override_font_sizes/font_size = 36
+text = "
+"
+autowrap_mode = 2
+
+[node name="GoalLabel" type="Label" parent="GuiPanel/VBoxContainer"]
+custom_minimum_size = Vector2(673, 0)
+layout_mode = 2
+theme = ExtResource("8_yewod")
+theme_override_font_sizes/font_size = 36
+autowrap_mode = 2
+
+[node name="Video" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(830, 500)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -869.0
+offset_top = -250.0
+offset_right = -39.0
+offset_bottom = 250.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Video"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -232.0
+offset_right = 400.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+volume_db = -80.0
+autoplay = true
+loop = true
+
+[connection signal="pressed" from="GuiPanel/GuiButton" to="." method="_on_gui_button_pressed"]
